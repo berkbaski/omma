@@ -7,7 +7,7 @@
   width: 100vw;
   height: 100vh;
   background: var(--modal-background-color);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
 
@@ -55,4 +55,8 @@
       width: 50% !important;
     }
   }
+}
+
+.show-modal {
+  display: flex;
 }
