@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 * {
   font-family: 'Inconsolata';
   outline: none;
@@ -6,4 +8,88 @@
 body {
   margin: 0;
   padding: 0;
+}
+
+button {
+  color: var(--light);
+  background: var(--primary);
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: var(--default-transition);
+
+  &:hover {
+    background: var(--dark);
+  }
+}
+
+input {
+  font-size: 1rem;
+  padding: 0.3rem 0.5rem;
+}
+
+main {
+  display: grid;
+  grid-template-rows: 10vh 70vh 20vh;
+  text-align: center;
+
+  header {
+    width: 100%;
+    height: 100%;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+      user-select: none;
+    }
+  }
+
+  article {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  footer {
+    background: var(--light);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    .playlist-name-input {
+      width: 30vw;
+    }
+
+    .loop-count-input {
+      width: 10vw;
+    }
+
+    @media screen and (max-width: $tablet-width) {
+      .input-groups {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .playlist-name-input {
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+
+      .loop-count-input {
+        width: 100%;
+      }
+    }
+
+    .generate-button {
+      font-size: 2rem;
+    }
+  }
 }
