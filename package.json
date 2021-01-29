@@ -4,6 +4,8 @@
   "description": "OMMA Test Case | Playlist Application",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack serve",
+    "start": "webpack",
     "lint": "pretty-quick -w . && eslint . --fix --no-error-on-unmatched-pattern",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
