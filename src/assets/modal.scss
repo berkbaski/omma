@@ -1,0 +1,58 @@
+@import './variables.scss';
+
+.modal {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--modal-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-container {
+    background: var(--white);
+    width: 50vw;
+    border-radius: 5px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--default-box-shadow);
+
+    @media screen and (max-width: $tablet-width) {
+      width: 80vw !important;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--light);
+
+      .modal {
+        &-input {
+          font-size: 1rem;
+          padding: 0.3rem 0.5rem;
+        }
+        &-label {
+          font-size: 1rem;
+          margin-bottom: 0.3rem;
+        }
+      }
+    }
+  }
+
+  .modal-button {
+    color: var(--light);
+    background: var(--primary);
+    font-size: 1rem;
+    padding: 0.5rem;
+    width: 20vw;
+    cursor: pointer;
+    margin-top: 1rem;
+
+    @media screen and (max-width: $tablet-width) {
+      width: 50% !important;
+    }
+  }
+}
