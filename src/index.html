@@ -6,6 +6,7 @@
     <title>OMMA Test Case | Playlist Application</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://berkbaski.com/range-slider.min.css" />
   </head>
 
   <body>
@@ -64,10 +65,23 @@
 
         <div class="input-group">
           <label class="modal-label" name="playlist-item-name-label">Weight</label>
+          <div class="modal-slider" name="playlist-item-weight"></div>
         </div>
 
         <button class="modal-button" name="create-playlist-item">Create</button>
       </div>
     </div>
+
+    <script src="https://berkbaski.com/range-slider.min.js"></script>
+    <script>
+      document.weightSlider = new RangeSlider(document.getElementsByName('playlist-item-weight')[0], {
+        min: 1,
+        max: 10,
+        value: 1,
+        step: 1,
+        size: 'small',
+        theme: 'custom',
+      })
+    </script>
   </body>
 </html>
