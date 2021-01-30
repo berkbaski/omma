@@ -65,7 +65,7 @@ main {
 
     .playlist-item {
       display: grid;
-      grid-template-columns: 1fr 5fr 3fr 1fr 1fr;
+      grid-template-columns: 1fr 5fr 3fr 3fr 1fr 1fr;
       align-items: center;
       justify-content: center;
       border-bottom: 1px solid var(--light);
@@ -91,12 +91,12 @@ main {
         justify-content: center;
       }
 
-      .danger-button:hover {
+      .delete-button:hover {
         color: var(--white);
         background: var(--danger);
       }
 
-      .warning-button:hover {
+      .edit-button:hover {
         color: var(--white);
         background: var(--warning);
       }

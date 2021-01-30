@@ -13,7 +13,18 @@ const playlistItems = document.querySelector('.playlist-items')
 
 let index = 0
 
-const editListener = ({ id }) => {
+const editListener = id => {
+  const playlistItem = document.querySelector(`div[data-item-id='${id.toString()}']`)
+
+  const nameColumn = playlistItem.querySelector('.playlist-item-name')
+  const linkColumn = playlistItem.querySelector('.playlist-item-link')
+  const weightColumn = playlistItem.querySelector('.playlist-item-weight')
+  const weightValue = parseInt(weightColumn.innerText.split(' ')[1], 10)
+
+  nameInput.value = nameColumn.innerText
+  linkInput.value = linkColumn.innerText
+  weightInput.setValue(weightValue)
+
   showModal(id)
 }
 
@@ -38,19 +49,23 @@ const createPlaylistItem = (name, link, weight) => {
   nameItem.innerText = name
   nameItem.className = 'playlist-item-name'
 
+  const linkItem = document.createElement('h3')
+  linkItem.innerText = link
+  linkItem.className = 'playlist-item-link'
+
   const weightItem = document.createElement('h3')
   weightItem.innerText = `Weight: ${weight}`
   weightItem.className = 'playlist-item-weight'
 
   const editButton = document.createElement('button')
-  editButton.className = 'action-button warning-button'
-  editButton.addEventListener('click', () => editListener({ id: index, name, link, weight }))
+  editButton.className = 'action-button edit-button'
+  editButton.addEventListener('click', () => editListener(index))
 
   const editIcon = document.createElement('i')
   editIcon.className = 'fa fa-edit'
 
   const deleteButton = document.createElement('button')
-  deleteButton.className = 'action-button danger-button'
+  deleteButton.className = 'action-button delete-button'
   deleteButton.addEventListener('click', () => deleteListener(playlistItem))
 
   const deleteIcon = document.createElement('i')
@@ -59,13 +74,18 @@ const createPlaylistItem = (name, link, weight) => {
   editButton.appendChild(editIcon)
   deleteButton.appendChild(deleteIcon)
 
-  playlistItem.append(indexItem, nameItem, weightItem, editButton, deleteButton)
+  playlistItem.append(indexItem, nameItem, linkItem, weightItem, editButton, deleteButton)
   playlistItems.appendChild(playlistItem)
 }
 
-const updatePlaylistItem = (playlistItem, newName, newLink, newWeight) => {
-  // eslint-disable-next-line no-console
-  console.log({ playlistItem, newName, newLink, newWeight })
+const updatePlaylistItem = (playlistItem, id, newName, newLink, newWeight) => {
+  const nameColumn = playlistItem.querySelector('.playlist-item-name')
+  const linkColumn = playlistItem.querySelector('.playlist-item-link')
+  const weightColumn = playlistItem.querySelector('.playlist-item-weight')
+
+  nameColumn.innerText = newName
+  linkColumn.innerText = newLink
+  weightColumn.innerText = `Weight: ${newWeight}`
 }
 
 const initPlaylist = () => {
@@ -80,7 +100,7 @@ const initPlaylist = () => {
     if (id == 0) {
       createPlaylistItem(name, link, weight)
     } else {
-      updatePlaylistItem(playlistItem, name, link, weight)
+      updatePlaylistItem(playlistItem, id, name, link, weight)
     }
 
     clearInputs()

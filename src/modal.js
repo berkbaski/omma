@@ -1,5 +1,6 @@
 const modal = document.querySelector('.modal')
 const modalButton = document.querySelector('.modal-button')
+const modalTitle = document.querySelector('.modal-title')
 const addNewItemButton = document.querySelector('.add-new-button')
 const playlistItemId = document.querySelector("span[name='playlistItemId']")
 
@@ -7,20 +8,22 @@ const nameInput = document.querySelector("input[name='playlist-item-name']")
 const linkInput = document.querySelector("input[name='playlist-item-link']")
 const weightInput = document.weightSlider
 
-const showModal = id => {
-  // eslint-disable-next-line no-console
-  console.log(id)
-  modal.classList.add('show-modal')
-}
-
-const hideModal = () => {
-  modal.classList.remove('show-modal')
-}
-
 const clearInputs = () => {
   nameInput.value = ''
   linkInput.value = ''
   weightInput.setValue(1)
+}
+
+const showModal = id => {
+  playlistItemId.setAttribute('data-id', id)
+  modal.classList.add('show-modal')
+  modalButton.innerHTML = id ? 'Update' : 'Create'
+  modalTitle.innerHTML = id ? 'Update playlist item' : 'Create a playlist item'
+}
+
+const hideModal = () => {
+  clearInputs()
+  modal.classList.remove('show-modal')
 }
 
 const initModal = () => {
