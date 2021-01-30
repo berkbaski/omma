@@ -7,6 +7,7 @@ import {
   linkInput,
   weightInput,
   clearInputs,
+  checkInputValidation,
 } from './modal'
 
 const playlistItems = document.querySelector('.playlist-items')
@@ -90,21 +91,24 @@ const updatePlaylistItem = (playlistItem, id, newName, newLink, newWeight) => {
 
 const initPlaylist = () => {
   const handleClickedModalButton = () => {
-    const id = parseInt(playlistItemId.getAttribute('data-id'), 10) || 0
-    const playlistItem = document.querySelector(`div[data-item-id='${id}']`)
+    const isValid = checkInputValidation()
+    if (isValid) {
+      const id = parseInt(playlistItemId.getAttribute('data-id'), 10) || 0
+      const playlistItem = document.querySelector(`div[data-item-id='${id}']`)
 
-    const name = nameInput.value
-    const link = linkInput.value
-    const weight = weightInput.value
+      const name = nameInput.value
+      const link = linkInput.value
+      const weight = weightInput.value
 
-    if (id == 0) {
-      createPlaylistItem(name, link, weight)
-    } else {
-      updatePlaylistItem(playlistItem, id, name, link, weight)
+      if (id == 0) {
+        createPlaylistItem(name, link, weight)
+      } else {
+        updatePlaylistItem(playlistItem, id, name, link, weight)
+      }
+
+      clearInputs()
+      hideModal()
     }
-
-    clearInputs()
-    hideModal()
   }
 
   modalButton.addEventListener('click', handleClickedModalButton)

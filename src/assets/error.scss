@@ -1,0 +1,9 @@
+.error {
+  &-label {
+    color: var(--danger);
+  }
+
+  &-input {
+    border: 1px solid var(--danger);
+  }
+}
