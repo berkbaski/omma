@@ -30,14 +30,14 @@ input {
   padding: 0.3rem 0.5rem;
 }
 
+.g-playlist-table-screen {
+  grid-template-rows: 10vh 90vh;
+}
+
 main {
   display: grid;
   grid-template-rows: 10vh 70vh 20vh;
   text-align: center;
-
-  .g-playlist-table-screen {
-    grid-template-rows: 10vh 90vh;
-  }
 
   header {
     width: 100%;
@@ -130,6 +130,15 @@ main {
       &-name {
         text-align: left;
       }
+
+      &-slider {
+        &-placeholder {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 1rem 0;
+        }
+      }
     }
 
     &-items {
@@ -181,4 +190,28 @@ main {
 
 .hide {
   display: none;
+}
+
+.g-playlist-items-slider {
+  .tns-outer {
+    button {
+      padding: 0.4rem;
+      margin-left: 10px;
+    }
+  }
+
+  .g-playlist-slider {
+    &-item {
+      border: 1px solid var(--light);
+      height: 200px;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--default-box-shadow);
+    }
+  }
+}
+
+.tns-outer {
+  width: 100vw;
 }

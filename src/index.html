@@ -6,6 +6,7 @@
     <title>OMMA Test Case | Playlist Application</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css" />
     <link rel="stylesheet" href="https://berkbaski.com/range-slider.min.css" />
   </head>
 
@@ -42,6 +43,20 @@
       </section>
     </main>
 
+    <main class="g-playlist-slider-screen hide">
+      <header>
+        <h1 class="title g-playlist-slider-title">Asd Playlist</h1>
+      </header>
+
+      <section class="g-playlist-items-slider">
+        <div class="g-playlist-item-slider-placeholder">
+          <button class="navigate-table-button">Navigate to table</button>
+        </div>
+
+        <div class="g-playlist-slider"></div>
+      </section>
+    </main>
+
     <div class="modal">
       <div class="modal-container">
         <h3 class="modal-title">Create a playlist item</h3>
@@ -67,6 +82,7 @@
       </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
     <script src="https://berkbaski.com/range-slider.min.js"></script>
     <script>
       document.weightSlider = new RangeSlider(document.getElementsByName('playlist-item-weight')[0], {
@@ -77,6 +93,19 @@
         size: 'small',
         theme: 'custom',
       })
+    </script>
+    <script>
+      document.addEventListener('sliderDataChanged', handleSliderDataChanged)
+      function handleSliderDataChanged() {
+        const slider = tns({
+          container: document.querySelector('.g-playlist-slider'),
+          items: 3,
+          slideBy: 'page',
+          mouseDrag: true,
+          swipeAngle: false,
+          speed: 400,
+        })
+      }
     </script>
   </body>
 </html>
