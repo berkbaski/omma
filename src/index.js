@@ -6,5 +6,7 @@ import './assets/slider.scss'
 
 // javascript imports
 import { initModal } from './modal'
+import { initPlaylist } from './playlist'
 
 initModal()
+initPlaylist()
