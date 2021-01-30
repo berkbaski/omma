@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import {
   showModal,
   hideModal,
@@ -10,6 +11,7 @@ import {
   checkModalInputsValidation,
 } from './modal'
 import validate from './validation'
+import execPlaylistProcess from './playlist-process'
 
 const playlistItems = document.querySelector('.playlist-items')
 
@@ -140,7 +142,37 @@ const initPlaylist = () => {
   const handleClickedGenerateButton = () => {
     const isValid = checkInputsValidation()
     if (isValid) {
-      alert('berk')
+      const playlistItems = []
+
+      const playlistElements = document.querySelectorAll('.playlist-item')
+      playlistElements.forEach(playlistElement => {
+        const nameElement = playlistElement.querySelector('.playlist-item-name')
+        const linkElement = playlistElement.querySelector('.playlist-item-link')
+        const weightElement = playlistElement.querySelector('.playlist-item-weight')
+
+        playlistItems.push({
+          label: nameElement.innerText,
+          link: linkElement.innerText,
+          value: parseInt(weightElement.innerText.toString().split(' ')[1], 10),
+        })
+      })
+
+      const playlistName = playlistNameInput.value
+      const generateCount = loopCountInput.value
+
+      const result = execPlaylistProcess(playlistItems, generateCount)
+      if (result) {
+        const tableData = result.playlistDetails.map(playlist => ({
+          playlistItemName: playlist.label,
+          weight: playlist.value,
+          rate: playlist.rate,
+          percentage: `%${playlist.ratePercent}`,
+        }))
+        console.table({ playlistName, generateCount })
+        console.table(tableData)
+      } else {
+        alert('Something went wrong. Check your inputs.')
+      }
     }
   }
 
