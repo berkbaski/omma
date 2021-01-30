@@ -13,11 +13,16 @@ import {
 import validate from './validation'
 import execPlaylistProcess from './playlist-process'
 
+const generatePlaylistScreen = document.querySelector('.generate-screen')
 const playlistItems = document.querySelector('.playlist-items')
 
 const playlistNameInput = document.querySelector('.playlist-name-input')
 const loopCountInput = document.querySelector('.loop-count-input')
 const generateButton = document.querySelector('.generate-button')
+
+const generatedPlaylistScreen = document.querySelector('.g-playlist-table-screen')
+const generatedPlaylistItems = document.querySelector('.g-playlist-items')
+const generatedPlaylistTitle = document.querySelector('.g-playlist-title')
 
 let index = 0
 
@@ -117,6 +122,17 @@ const checkInputsValidation = () => {
   return isValid
 }
 
+const generateTableData = playlistItems => {
+  playlistItems.forEach((playlist, index) => {
+    const playlistItem = document.createElement('div')
+    playlistItem.className = 'g-playlist-item'
+    playlistItem.innerHTML = `
+         <h3 class="g-playlist-item-index">${index + 1}.</h3>
+         <h3 class="g-playlist-item-name">${playlist}</h3>`
+    generatedPlaylistItems.appendChild(playlistItem)
+  })
+}
+
 const initPlaylist = () => {
   const handleClickedModalButton = () => {
     const isValid = checkModalInputsValidation()
@@ -168,8 +184,15 @@ const initPlaylist = () => {
           rate: playlist.rate,
           percentage: `%${playlist.ratePercent}`,
         }))
+        // eslint-disable-next-line no-console
         console.table({ playlistName, generateCount })
+        // eslint-disable-next-line no-console
         console.table(tableData)
+
+        generatePlaylistScreen.classList.add('hide')
+        generatedPlaylistScreen.classList.remove('hide')
+        generatedPlaylistTitle.innerText = `${playlistName} Playlist!`
+        generateTableData(result.resultArray)
       } else {
         alert('Something went wrong. Check your inputs.')
       }
