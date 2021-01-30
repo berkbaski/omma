@@ -161,40 +161,44 @@ const initPlaylist = () => {
       const playlistItems = []
 
       const playlistElements = document.querySelectorAll('.playlist-item')
-      playlistElements.forEach(playlistElement => {
-        const nameElement = playlistElement.querySelector('.playlist-item-name')
-        const linkElement = playlistElement.querySelector('.playlist-item-link')
-        const weightElement = playlistElement.querySelector('.playlist-item-weight')
-
-        playlistItems.push({
-          label: nameElement.innerText,
-          link: linkElement.innerText,
-          value: parseInt(weightElement.innerText.toString().split(' ')[1], 10),
-        })
-      })
-
-      const playlistName = playlistNameInput.value
-      const generateCount = loopCountInput.value
-
-      const result = execPlaylistProcess(playlistItems, generateCount)
-      if (result) {
-        const tableData = result.playlistDetails.map(playlist => ({
-          playlistItemName: playlist.label,
-          weight: playlist.value,
-          rate: playlist.rate,
-          percentage: `%${playlist.ratePercent}`,
-        }))
-        // eslint-disable-next-line no-console
-        console.table({ playlistName, generateCount })
-        // eslint-disable-next-line no-console
-        console.table(tableData)
-
-        generatePlaylistScreen.classList.add('hide')
-        generatedPlaylistScreen.classList.remove('hide')
-        generatedPlaylistTitle.innerText = `${playlistName} Playlist!`
-        generateTableData(result.resultArray)
+      if (!playlistElements || playlistElements.length == 0) {
+        alert('You must add at least a playlist item.')
       } else {
-        alert('Something went wrong. Check your inputs.')
+        playlistElements.forEach(playlistElement => {
+          const nameElement = playlistElement.querySelector('.playlist-item-name')
+          const linkElement = playlistElement.querySelector('.playlist-item-link')
+          const weightElement = playlistElement.querySelector('.playlist-item-weight')
+
+          playlistItems.push({
+            label: nameElement.innerText,
+            link: linkElement.innerText,
+            value: parseInt(weightElement.innerText.toString().split(' ')[1], 10),
+          })
+        })
+
+        const playlistName = playlistNameInput.value
+        const generateCount = loopCountInput.value
+
+        const result = execPlaylistProcess(playlistItems, generateCount)
+        if (result) {
+          const tableData = result.playlistDetails.map(playlist => ({
+            playlistItemName: playlist.label,
+            weight: playlist.value,
+            rate: playlist.rate,
+            percentage: `%${playlist.ratePercent}`,
+          }))
+          // eslint-disable-next-line no-console
+          console.table({ playlistName, generateCount })
+          // eslint-disable-next-line no-console
+          console.table(tableData)
+
+          generatePlaylistScreen.classList.add('hide')
+          generatedPlaylistScreen.classList.remove('hide')
+          generatedPlaylistTitle.innerText = `${playlistName} Playlist!`
+          generateTableData(result.resultArray)
+        } else {
+          alert('Something went wrong. Check your inputs.')
+        }
       }
     }
   }
