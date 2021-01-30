@@ -7,10 +7,15 @@ import {
   linkInput,
   weightInput,
   clearInputs,
-  checkInputValidation,
+  checkModalInputsValidation,
 } from './modal'
+import validate from './validation'
 
 const playlistItems = document.querySelector('.playlist-items')
+
+const playlistNameInput = document.querySelector('.playlist-name-input')
+const loopCountInput = document.querySelector('.loop-count-input')
+const generateButton = document.querySelector('.generate-button')
 
 let index = 0
 
@@ -89,9 +94,30 @@ const updatePlaylistItem = (playlistItem, id, newName, newLink, newWeight) => {
   weightColumn.innerText = `Weight: ${newWeight}`
 }
 
+const checkInputsValidation = () => {
+  let isValid = true
+
+  if (validate(playlistNameInput.value)) {
+    playlistNameInput.classList.remove('error-input')
+  } else {
+    playlistNameInput.classList.add('error-input')
+    isValid = false
+  }
+
+  const loopCountValue = parseInt(loopCountInput.value, 10) || 0
+  if (validate(loopCountValue) && loopCountValue > 0) {
+    loopCountInput.classList.remove('error-input')
+  } else {
+    loopCountInput.classList.add('error-input')
+    isValid = false
+  }
+
+  return isValid
+}
+
 const initPlaylist = () => {
   const handleClickedModalButton = () => {
-    const isValid = checkInputValidation()
+    const isValid = checkModalInputsValidation()
     if (isValid) {
       const id = parseInt(playlistItemId.getAttribute('data-id'), 10) || 0
       const playlistItem = document.querySelector(`div[data-item-id='${id}']`)
@@ -111,6 +137,14 @@ const initPlaylist = () => {
     }
   }
 
+  const handleClickedGenerateButton = () => {
+    const isValid = checkInputsValidation()
+    if (isValid) {
+      alert('berk')
+    }
+  }
+
+  generateButton.addEventListener('click', handleClickedGenerateButton)
   modalButton.addEventListener('click', handleClickedModalButton)
 }
 

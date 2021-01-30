@@ -28,7 +28,7 @@ const clearInputs = () => {
   weightLabel.classList.remove('error-label')
 }
 
-const checkInputValidation = () => {
+const checkModalInputsValidation = () => {
   let isValid = true
 
   if (validate(nameInput.value)) {
@@ -97,5 +97,5 @@ export {
   linkInput,
   weightInput,
   clearInputs,
-  checkInputValidation,
+  checkModalInputsValidation,
 }
